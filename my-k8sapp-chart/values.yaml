@@ -4,6 +4,6 @@
 # Declare variables to be passed into your templates.
 container:
   name: k8s-app
-  image: val717/k8s-app:1.0
+  image: val717/k8s-app:65
   restart: Always
   labels: k8s-apps
