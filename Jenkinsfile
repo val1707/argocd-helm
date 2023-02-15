@@ -18,9 +18,11 @@ node {
                         sh "sed -i 's+val717/k8s-app.*+val717/k8s-app:${DOCKERTAG}+g' my-k8sapp-chart/values.yaml"
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "git add ."
+                        sh "git checkout -B $TARGET_BRANCH"
+                        sh "git config user.name 'val1707'"
+                        sh "git config user.email 'valentin.kurtev@amusnet.com'"
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/argocd-helm.git HEAD:main"   
-    }
+                        sh "git push git push origin HEAD:$TARGET_BRANCH 
    }
   }
  }
