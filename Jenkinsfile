@@ -16,7 +16,7 @@ node {
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push git@github.com:val1707/argocd-helm.git"
+                        sh "git push git@github.com:val1707/argocd-helm.git HEAD:main"
       }
     }
   }
