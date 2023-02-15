@@ -10,14 +10,13 @@ node {
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'jenkins-pet', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                       
+                    withCredentials([usernamePassword(credentialsId: 'jenkins-pet', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "sed -i 's+val717/k8s-app.*+val717/k8s-app:${DOCKERTAG}+g' my-k8sapp-chart/values.yaml"
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "git add ."
-                        sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git@github.com:val1707/argocd-helm.git HEAD:main"
+                        sh "git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f""
+                        sh "git push origin HEAD:main" 
       }
     }
   }
