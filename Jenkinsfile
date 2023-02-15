@@ -10,9 +10,6 @@ node {
      stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'jenkins-pet', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                    
                         //sh "git switch master"
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "sed -i 's+val717/k8s-app.*+val717/k8s-app:${DOCKERTAG}+g' my-k8sapp-chart/values.yaml"
