@@ -1,4 +1,4 @@
-node {
+nnode {
     def app
 
     stage('Clone repository') {
@@ -7,29 +7,19 @@ node {
         checkout scm
     }
 
-     stage('Update GIT') {
+    stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        //sh "git switch master"
-                        sh "cat my-k8sapp-chart/values.yaml"
+                    withCredentials([usernamePassword(credentialsId: 'jenkins-pet', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                       
+                        sh "cat values.yaml"
                         sh "sed -i 's+val717/k8s-app.*+val717/k8s-app:${DOCKERTAG}+g' my-k8sapp-chart/values.yaml"
-                        sh "cat my-k8sapp-chart/values.yaml"
+                        sh "cat  values.yaml"
                         sh "git add ."
-                        sh "git config user.name 'val1707'"
-                        sh "git config user.email 'valentin.kurtev@amusnet.com'"
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-   }
-  }
- }
-     stage('Push') {
-        environment {
-            GIT_AUTH = credentials('jenkins-pet')
-        }
-        steps {
-            sh('''
-                git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
-                git push origin HEAD:main
-            ''')
-        }
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/argocd-helm.git HEAD:main"
+      }
     }
+  }
+}
 }
