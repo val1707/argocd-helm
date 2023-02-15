@@ -18,8 +18,18 @@ node {
                         sh "git config user.name 'val1707'"
                         sh "git config user.email 'valentin.kurtev@amusnet.com'"
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push git push origin HEAD:main" 
    }
   }
  }
+     stage('Push') {
+        environment {
+            GIT_AUTH = credentials('jenkins-pet')
+        }
+        steps {
+            sh('''
+                git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+                git push origin HEAD:$TARGET_BRANCH
+            ''')
+        }
+    }
 }
