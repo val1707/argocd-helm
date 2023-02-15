@@ -15,7 +15,7 @@ node {
                         sh "sed -i 's+val717/k8s-app.*+val717/k8s-app:${DOCKERTAG}+g' my-k8sapp-chart/values.yaml"
                         sh "cat my-k8sapp-chart/values.yaml"
                         sh "git add ."
-                        sh "git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+                        sh "git config --local credential.helper "if() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
                         sh "git push origin HEAD:main" 
       }
     }
