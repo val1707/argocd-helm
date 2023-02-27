@@ -1,6 +1,6 @@
 apiVersion: v2
-name: my-k8sapp-chart
-description: A Helm chart to manage my k8s-app on Kubernetes
+name: my-web-chart
+description: A Helm chart to manage my webapp on Kubernetes
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives

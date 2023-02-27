@@ -1,9 +1,0 @@
----
-# Default values for my-k8sapp-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-container:
-  name: k8s-app
-  image: val717/k8s-app:65
-  restart: Always
-  labels: k8s-apps
