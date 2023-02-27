@@ -20,7 +20,7 @@ node {
                     sh 'echo ${BUILD_TIMESTAMP} >> version.txt'
                     sh "git add version.txt"
                     sh "git commit -m 'Update version.txt to commit '"
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/manifest2.git HEAD:main"
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/argocd-helm.git  HEAD:main"
                 }
             }
         }
