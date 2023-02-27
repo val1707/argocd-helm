@@ -1,5 +1,5 @@
 container:
   name: wordpress
-  image: val717/webapp:BUILD_NUMBER
+  image: val717/webapp:17
   # restart: Always
   # labels: webapp 
