@@ -61,8 +61,8 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: val717/webapp:17
-        name: wordpress
+      - image: {{ .Values.container.image }}
+        name: {{ .Values.container.name }}
         env:
         - name: WORDPRESS_DB_HOST
           value: mysql
