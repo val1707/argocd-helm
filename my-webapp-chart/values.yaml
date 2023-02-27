@@ -1,5 +1,5 @@
 container:
   name: wordpress
-  image: val717/webapp:
+  image: val717/webapp:latest
   # restart: Always
   # labels: webapp 
