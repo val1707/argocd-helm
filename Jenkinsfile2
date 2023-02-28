@@ -19,7 +19,7 @@ node {
                     sh 'git rev-parse HEAD >> version.txt'
                     sh 'echo ${BUILD_TIMESTAMP} >> version.txt'
                     sh "git add version.txt"
-                    sh "git commit -m 'Update version.txt to commit '"
+                    sh "git commit -m 'Update version.txt'"
                     sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/argocd-helm.git  HEAD:main"
                 }
             }
